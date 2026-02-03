@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1115" />
+  <title>Sufi Beat Down</title>
+
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img
+          class="brand__icon"
+          src="./assets/logo.png"
+          alt="Sufi Beat Down"
+          onerror="this.onerror=null;this.src='./assets/logo.jpg';"
+        />
+        <div class="brand__text">
+          <div class="brand__title">SUFI BEAT DOWN</div>
+          <div class="brand__subtitle" id="screenSubtitle">Loading</div>
+        </div>
+      </div>
+
+      <div class="status">
+        <div class="pill" id="onlinePill"><span class="dot"></span>Online: Connected</div>
+        <div class="pill" id="offlinePill"><span class="dot dot--ok"></span>Offline Ready</div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <!-- Viewer (shows the UI images responsively) -->
+      <section class="viewer">
+        <div class="viewer__frame">
+          <img id="uiImage" class="viewer__img" alt="UI Screen" />
+        </div>
+
+        <div class="viewer__caption">
+          <div class="caption__left">
+            <div class="small" id="hintLeft">Hint: Use the buttons below to navigate.</div>
+          </div>
+
+          <div class="caption__right">
+            <button class="btn btn--ghost" id="btnPrev">◀ Prev</button>
+            <button class="btn" id="btnNext">Next ▶</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Controls / actions -->
+      <section class="panel">
+        <div class="panel__row">
+          <div class="panel__card">
+            <h3>Flow Controls</h3>
+            <p class="muted">Preview the game flow using your uploaded UI screens.</p>
+
+            <div class="grid">
+              <button class="btn" data-go="1">UI1 Loading</button>
+              <button class="btn" data-go="2">UI2 Mode</button>
+              <button class="btn" data-go="3">UI3 Online</button>
+              <button class="btn" data-go="4">UI4 Character</button>
+              <button class="btn" data-go="5">UI5 Stage</button>
+              <button class="btn" data-go="6">UI6 Fight HUD</button>
+              <button class="btn" data-go="7">UI7 Fight Intro</button>
+              <button class="btn" data-go="8">UI8 Victory</button>
+              <button class="btn" data-go="9">UI9 Defeat</button>
+              <button class="btn" data-go="10">UI10 Results</button>
+              <button class="btn" data-go="11">UI11 Pause</button>
+              <button class="btn" data-go="12">UI12 Settings</button>
+              <button class="btn" data-go="13">UI13 Tutorial</button>
+              <button class="btn" data-go="14">UI14 Bio</button>
+            </div>
+          </div>
+
+          <div class="panel__card">
+            <h3>Audio</h3>
+            <p class="muted">Uses your uploaded sounds. Click to test.</p>
+
+            <div class="audioRow">
+              <button class="btn btn--small" data-sfx="menu">Menu</button>
+              <button class="btn btn--small" data-sfx="punch1">Punch 1</button>
+              <button class="btn btn--small" data-sfx="punch2">Punch 2</button>
+              <button class="btn btn--small" data-sfx="kick1">Kick 1</button>
+              <button class="btn btn--small" data-sfx="kick2">Kick 2</button>
+              <button class="btn btn--small" data-sfx="block">Block</button>
+              <button class="btn btn--small" data-sfx="super">Super</button>
+              <button class="btn btn--small" data-sfx="win">Win</button>
+              <button class="btn btn--small" data-sfx="lose">Lose</button>
+              <button class="btn btn--small" data-sfx="crowd">Crowd</button>
+            </div>
+
+            <div class="toggles">
+              <label class="toggle">
+                <input type="checkbox" id="musicToggle" checked />
+                <span>Music</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="sfxToggle" checked />
+                <span>SFX</span>
+              </label>
+              <label class="toggle">
+                <span>Volume</span>
+                <input type="range" id="vol" min="0" max="100" value="70" />
+              </label>
+            </div>
+
+            <div class="musicRow">
+              <button class="btn btn--small" data-music="fight">Fight (fight.mp3)</button>
+              <button class="btn btn--small" data-music="west1">West 1</button>
+              <button class="btn btn--small" data-music="west2">West 2</button>
+              <button class="btn btn--small" data-music="west3">West 3</button>
+              <button class="btn btn--small" data-music="west4">West 4</button>
+              <button class="btn btn--ghost btn--small" id="stopMusic">Stop</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel__card">
+          <h3>Stage Thumbnails</h3>
+          <p class="muted">Pulled from <code>assets/stages/stage01.png</code> … <code>stage10.png</code></p>
+
+          <div class="thumbs" id="stageThumbs"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="small">v0.3 PWA • Responsive PC / Tablet / Mobile</div>
+      <div class="small" id="cacheStatus">Cache: checking…</div>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
